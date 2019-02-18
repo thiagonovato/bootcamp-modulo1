@@ -17,7 +17,7 @@ app.get("/login", (req, res) => {
 
 // Pegando parâmetros via url
 app.get("/nome/:name", (req, res) => {
-  return res.send(`Bem-vindo, ${req.params.name}`);
+  return res.send(`Welcome, ${req.params.name}`);
 });
 
 // Retornando resposta no formato json
