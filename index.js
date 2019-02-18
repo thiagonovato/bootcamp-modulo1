@@ -1,15 +1,33 @@
-// Http é um pacote que já vem dentro do node.
-// A linah abaixo faz a requisição desta lib
-const http = require("http");
+// Adicionando a primeira lib: express
+// yarn add express
+const express = require("express");
 
-// Criando um novo servidor.
-// Todo servidor possui req (requisição) e res (resposta).
-// Na linha abaixo, estamos criando um servidor, que vai escrever o req no console
-// e por fim o servidor fica rodando no console. Ao abrir localhost:3000, deve aparecer
-// a mensagem do res.end.
-http
-  .createServer((req, res) => {
-    console.log(req);
-    return res.end("Hello World");
-  })
-  .listen(3000);
+// Criar um servidor do express
+const app = express();
+
+// Rota /
+app.get("/", (req, res) => {
+  return res.send(`Bem-vindo, ${req.query.name}`);
+});
+
+// Rota /login
+app.get("/login", (req, res) => {
+  return res.send("Login");
+});
+
+// Pegando parâmetros via url
+app.get("/nome/:name", (req, res) => {
+  return res.send(`Bem-vindo, ${req.params.name}`);
+});
+
+// Retornando resposta no formato json
+app.get("/nome/json/:name", (req, res) => {
+  return res.json({
+    message: `Bem-vindo, ${
+      req.params.name
+    }. Esta é uma resposta no formato json.`
+  });
+});
+
+// Servidor está escutando na porta 3000
+app.listen(3000);
